@@ -6,15 +6,15 @@ import SearchBar from './Components/SearchBar'
 // import viteLogo from '/vite.svg'
 
 function App() {
-  
-
+  const [cityData, setCityData] = useState({})
+  console.log(cityData);
   return (
     <>
-      <div className='container w-[80%] max-w-[1300px] mx-auto'>
+      <div className='container w-[80%] max-w-[1200px] mx-auto'>
         <main>
           <Header />
           <Slogan />
-          <SearchBar placeholder="Search for a place..." btnText="Search" />
+          <SearchBar placeholder="Search for a place..." btnText="Search" setCityData={setCityData} />
         </main>
       </div>
     </>
