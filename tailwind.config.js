@@ -1,6 +1,15 @@
 // tailwind.config.js
 module.exports = {
   theme: {
+    screens: {
+        'xs': '480px',   // custom breakpoint
+        'sm': '640px',   // small screens
+        'md': '768px',   // medium screens
+        'lg': '1000px',  // large screens
+        'xl': '1200px',  // extra large screens
+        '2xl': '1440px', // large screens
+        '3xl': '1600px', // very large screens
+      },
     extend: {
       fontFamily: {
         dmSans: ['"DM Sans"', 'sans-serif'],
@@ -8,5 +17,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 }
