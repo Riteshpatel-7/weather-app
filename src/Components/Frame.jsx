@@ -25,7 +25,7 @@ export default function ({ weatherData }) {
           </div>
         </section>
       </div>
-      <div className="flex gap-6 flex-wrap lg:col-span-2 lg:flex-nowrap">
+      <div className="grid gap-6 w-full grid-cols-[repeat(auto-fit,minmax(136px,1fr))] lg:col-span-2">
         <DataCard title="Wind Now" data={`12 Km/h`} />
         <DataCard title="Wind Now" data={`12 Km/h`} />
         <DataCard title="Wind Now" data={`12 Km/h`} />
@@ -33,7 +33,7 @@ export default function ({ weatherData }) {
       </div>
       <div className="lg:col-span-2">
         <p className="font-semibold">Daily forecast</p>
-        <div className="flex gap-4 mt-4 flex-wrap lg:flex-nowrap">
+        <div className="grid gap-6 w-full grid-cols-[repeat(auto-fit,minmax(74px,1fr))] mt-4">
           <DailyForecastCard day={"Wed"} min={20} max={30} icon={icon1} />
           <DailyForecastCard day={"Thu"} min={20} max={30} icon={sunnyIcon} />
           <DailyForecastCard day={"Fri"} min={20} max={30} icon={icon5} />
