@@ -5,8 +5,8 @@ module.exports = {
         'xs': '480px',   // custom breakpoint
         'sm': '640px',   // small screens
         'md': '768px',   // medium screens
-        'lg': '1000px',  // large screens
-        'xl': '1200px',  // extra large screens
+        'lg': '1024px',  // large screens
+        'xl': '1280px',  // extra large screens
         '2xl': '1440px', // large screens
         '3xl': '1600px', // very large screens
       },

@@ -17,3 +17,18 @@
   border-top-left-radius: 9999px;     /* fully rounded */
   border-bottom-left-radius: 9999px;  
 }
+
+.moving {
+  animation: moving 2s ease-in-out infinite;
+}
+
+@keyframes moving {
+  /* 0%   { transform: translateY(0%) ; }
+  25%  { transform: translateY(1%); }
+  50%  { transform: translateY(0%) ; }   /* cross center smoothly */
+  /* 75%  { transform: translateY(-4%) scale(1.03); }
+  100% { transform: translateY(0%) ; } */ 
+  0%   { transform: scale(1) ; }
+  50%  { transform: scale(1.1) ; }   /* cross center smoothly */
+  100% { transform: scale(1) ; }
+}
