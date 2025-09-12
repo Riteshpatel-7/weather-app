@@ -32,7 +32,7 @@ function App() {
   console.log(units);
   return (
     <>
-      <div className='container w-[90%] sm:w-[70%] max-w-[1200px] mx-auto lg:w-[90%] xl:w-[80%]' onClick={() => setSuggestions(false)}>
+      <div className='container w-[90%] sm:w-[70%] max-w-[1200px] mx-auto lg:w-[90%] xl:w-[80%]' onClick={() => {setSuggestions(false); setUnitOptions(false)}}>
         <main>
           <Header setUnitOptions={setUnitOptions} unitOptions={unitOptions} setUnits={setUnits} units={units}/>
           <Slogan />
