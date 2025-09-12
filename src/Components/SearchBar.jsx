@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import searchIcon from "../assets/images/icon-search.svg";
 import Suggestion from "./Suggestion";
 
-export default function SearchBar({ placeholder, btnText, setCityData, suggestions, setSuggestions }) {
+export default function SearchBar({ placeholder, btnText, setCityData, suggestions, setSuggestions, setUnits }) {
   const [input, setInput] = useState("");
 
   return (

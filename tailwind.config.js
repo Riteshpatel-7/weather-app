@@ -1,5 +1,9 @@
 // tailwind.config.js
 module.exports = {
+  content: [
+    './index.html',
+    './src/**/*.{js,jsx,ts,tsx}', // adjust to your actual folders
+  ],
   theme: {
     screens: {
         'xs': '480px',   // custom breakpoint

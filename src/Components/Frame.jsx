@@ -55,7 +55,7 @@ function getTimeInAMPM(time) {
   return hour + ampm;
 }
 
-export default function ({ cityData, currentWeather }) {
+export default function ({ cityData, currentWeather, units }) {
   if (Object.keys(currentWeather).length === 0) {
     return (
       <div className="h-[300px] flex flex-col justify-center items-center opacity-60">
@@ -73,8 +73,8 @@ export default function ({ cityData, currentWeather }) {
   const forecast = {
     "Feels Like": `${currentWeather.hourly.apparent_temperature[currentTimeIndex]}°`,
     Humidity: `${currentWeather.hourly.relative_humidity_2m[currentTimeIndex]}%`,
-    Wind: `${Math.round(parseFloat(currentWeather.hourly.wind_speed_10m[currentTimeIndex]))} km/h`,
-    Precipitation: `${currentWeather.hourly.precipitation[currentTimeIndex]} in`,
+    Wind: `${Math.round(parseFloat(currentWeather.hourly.wind_speed_10m[currentTimeIndex]))} ${units.windSpeed}`,
+    Precipitation: `${currentWeather.hourly.precipitation[currentTimeIndex]} ${units.precipitation}`,
   };
 
   const dailyForecast = [];

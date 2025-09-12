@@ -2,6 +2,32 @@
 @import "tailwindcss";
 
 
+li{
+  text-align: left;
+  padding: 8px;
+  padding-block: 6px;
+  border-radius: 8px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.highlighted{
+  background-color: hsl(243,23%,30%);
+  border: 1px solid hsl(243,27%,24%);
+}
+
+.highlighted img{
+  opacity: 1;
+}
+
+li:hover{
+  background-color: hsl(243,23%,24%);
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+}
+
 ::-webkit-scrollbar {
   width: 6px;   /* make it thin */
 }
