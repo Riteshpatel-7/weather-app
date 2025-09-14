@@ -12,6 +12,7 @@ function App() {
   const [currentWeather, setCurrentWeather] = useState({})
   const [suggestions, setSuggestions] = useState(false);
   const [unitOptions, setUnitOptions] = useState(false);
+  const [hourlyDropdown, setHourlyDropdown] = useState(false);
   const [units, setUnits] = useLocalStorage('units', {
     temperature: '',
     windSpeed: 'km/h',
@@ -32,12 +33,12 @@ function App() {
   console.log(units);
   return (
     <>
-      <div className='container w-[90%] sm:w-[70%] max-w-[1200px] mx-auto lg:w-[90%] xl:w-[80%]' onClick={() => {setSuggestions(false); setUnitOptions(false)}}>
+      <div className='container w-[90%] sm:w-[70%] max-w-[1200px] mx-auto lg:w-[90%] xl:w-[80%]' onClick={() => {setSuggestions(false); setUnitOptions(false); setHourlyDropdown(false)}}>
         <main>
           <Header setUnitOptions={setUnitOptions} unitOptions={unitOptions} setUnits={setUnits} units={units}/>
           <Slogan />
           <SearchBar placeholder="Search for a place..." btnText="Search" setCityData={setCityData} suggestions={suggestions} setSuggestions={setSuggestions} setUnits={setUnits}/>
-          <Frame cityData={cityData} currentWeather={currentWeather} units={units} />
+          <Frame cityData={cityData} currentWeather={currentWeather} units={units} hourlyDropdown={hourlyDropdown} setHourlyDropdown={setHourlyDropdown} />
         </main>
       </div>
     </>

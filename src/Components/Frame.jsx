@@ -12,6 +12,7 @@ import icon7 from "../assets/images/icon-drizzle.webp";
 import dropdownIcon from "../assets/images/icon-dropdown.svg";
 import errorIcon from "../assets/images/icon-error.svg";
 import HourlyForecastEle from "./HourlyForecastEle";
+import HourlyDropdown from "./HourlyDropdown";
 const today = new Date();
 
 const options = {
@@ -40,7 +41,7 @@ function getWeatherIcon(code) {
 function getHourlyIndexes(date, currentWeather) {
   const indexes = [];
   for (let i = 0; i < currentWeather.hourly.time.length; i++) {
-    if (currentWeather.hourly.time[i].includes(date)) {
+    if (currentWeather.hourly.time[i].includes(date) && i >= currentWeather.hourly.time.indexOf(currentWeather.current.time.slice(0, 14) + "00")) {
       indexes.push(i);
     }
   }
@@ -55,7 +56,7 @@ function getTimeInAMPM(time) {
   return hour + ampm;
 }
 
-export default function ({ cityData, currentWeather, units }) {
+export default function ({ cityData, currentWeather, units, hourlyDropdown, setHourlyDropdown }) {
   if (Object.keys(currentWeather).length === 0) {
     return (
       <div className="h-[300px] flex flex-col justify-center items-center opacity-60">
@@ -92,11 +93,12 @@ export default function ({ cityData, currentWeather, units }) {
   }
 
   const [hourlyDate, setHourlyDate] = useState(currentWeather.daily.time[0]);
+  const [weekday, setWeekDay] = useState(today.toLocaleDateString("en-US", {weekday: 'long'}));
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
       <div className="lg:col-span-2">
-        <section className='flex flex-col justify-between items-center bg-[url("/bg-today-small.svg")] lg:bg-[url("/bg-today-large.svg")] lg:flex-row bg-cover bg-center rounded-2xl py-6 lg:px-8 lg:py-12 text-white'>
+        <section className='flex flex-col justify-between items-center bg-[url("/bg-today-small.svg")] lg:bg-[url("/bg-today-large.svg")] lg:flex-row bg-cover bg-center rounded-2xl p-6 lg:px-8 lg:py-12 text-white'>
           <div className="flex flex-col gap-2 text-center lg:text-left">
             <h2 className="text-2xl font-bold">
               {cityData.name.replace("ā", "a")}, {cityData.admin1},{" "}
@@ -104,7 +106,7 @@ export default function ({ cityData, currentWeather, units }) {
             </h2>
             <p className="opacity-75">{formattedDate}</p>
           </div>
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-8 lg:gap-4 items-center">
             <img
               className="moving h-24 lg:h-[120px]"
               src={getWeatherIcon(
@@ -140,9 +142,10 @@ export default function ({ cityData, currentWeather, units }) {
       <div className="w-[100%] max-h-[564px] xl:max-h-[574px] lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-end-4 flex flex-col gap-4 bg-[hsl(243,27%,20%)] rounded-2xl p-4 overflow-y-scroll">
         <div className="flex justify-between items-center xl:mb-2">
           <p className="text-white font-semibold">Hourly forecast</p>
-          <button className="flex gap-2 text-[0.96rem] bg-[hsl(243,23%,30%)] rounded-md px-4 py-1">
-            <span>Tuesday</span>
+          <button onClick={(e)=>{e.stopPropagation(); setHourlyDropdown(!hourlyDropdown)}} className="flex items-center justify-center gap-2 text-[0.96rem] relative bg-[hsl(243,23%,30%)] rounded-md px-4 py-1">
+            <span>{weekday}</span>
             <img src={dropdownIcon} alt="dropdown" />
+            <HourlyDropdown hourlyDropdown={hourlyDropdown} setHourlyDropdown={setHourlyDropdown} today={today} setWeekDay={setWeekDay} setHourlyDate={setHourlyDate} currentWeather={currentWeather}/>
           </button>
         </div>
         {getHourlyIndexes(hourlyDate, currentWeather).map((index) => (
