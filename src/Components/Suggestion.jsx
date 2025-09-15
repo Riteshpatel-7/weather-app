@@ -7,8 +7,9 @@ export default function Suggestion({ input, setCityData, setSuggestions }) {
     if (input === '')
         return;
     else {
+        const myInput = input.replace(/\s+$/, "")//remove space at end
         useEffect(() => {
-            fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${input}&count=4&language=en&format=json`)
+            fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${myInput}&count=4&language=en&format=json`)
                 .then(res => res.json())
                 .then(data => setCitiesData(data.results))
                 .catch(err => console.log(err))
