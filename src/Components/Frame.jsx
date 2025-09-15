@@ -10,7 +10,6 @@ import icon5 from "../assets/images/icon-partly-cloudy.webp";
 import icon6 from "../assets/images/icon-fog.webp";
 import icon7 from "../assets/images/icon-drizzle.webp";
 import dropdownIcon from "../assets/images/icon-dropdown.svg";
-import errorIcon from "../assets/images/icon-error.svg";
 import HourlyForecastEle from "./HourlyForecastEle";
 import HourlyDropdown from "./HourlyDropdown";
 const today = new Date();
