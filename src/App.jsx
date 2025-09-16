@@ -9,6 +9,7 @@ function App() {
   const [suggestions, setSuggestions] = useState(false);
   const [hourlyDropdown, setHourlyDropdown] = useState(false);
   const [unitOptions, setUnitOptions] = useState(false);
+  const [myLocalSuggestion, setMyLocalSuggestion] = useState(false);
   const [units, setUnits] = useLocalStorage("units", {
     temperature: "",
     windSpeed: "km/h",
@@ -23,6 +24,7 @@ function App() {
           setSuggestions(false);
           setUnitOptions(false);
           setHourlyDropdown(false);
+          setMyLocalSuggestion(false);
         }}
       >
         <main>
@@ -40,6 +42,8 @@ function App() {
               setSuggestions,
               hourlyDropdown,
               setHourlyDropdown,
+              myLocalSuggestion,
+              setMyLocalSuggestion
             }}
           />
         </main>

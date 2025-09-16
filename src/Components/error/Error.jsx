@@ -1,15 +1,19 @@
-import { useRouteError } from "react-router-dom";
+import { useLocation, useRouteError } from "react-router-dom";
 import iconError from '/public/icon-error.svg'
 import refresh from '/public/refresh.png'
 
 export default function Error() {
+  const location = useLocation();                    // gives something like "/error?message=Geolocation%20request%20timed%20out!"
+  const params = new URLSearchParams(location.search);
+  const message = params.get("message");             // "Geolocation request timed out!"
+
     const error = useRouteError();
   return (
     <div className="flex flex-col justify-center items-center text-center text-white">
       <img className="w-[46px] mt-16 mb-8" src={iconError} alt="" />  
       <h1 className="text-4xl lg:text-5xl font-bold mb-6">{error?.status || "Something went wrong"}</h1>
       <p className="text-lg lg:text-xl mb-6 opacity-65 text-[o.9rem] w-[300px] lg:w-[500px]">
-        {error?.statusText || error?.message || "Error occurred while fetching data. Try with different input or check your internet connection."}
+        {error?.statusText || error?.message || message}
       </p>
       <a
         href="/"

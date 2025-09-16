@@ -6,9 +6,10 @@ import { useEffect, useState } from "react";
 import { Navigate, useOutletContext } from "react-router-dom";
 
 export default function Home() {
-  const {units, setUnits, suggestions, setSuggestions, hourlyDropdown, setHourlyDropdown} = useOutletContext();
+  const {units, setUnits, suggestions, setSuggestions, hourlyDropdown, setHourlyDropdown, myLocalSuggestion, setMyLocalSuggestion} = useOutletContext();
   const [cityData, setCityData] = useLocalStorage("cityData", {});
   const [currentWeather, setCurrentWeather] = useState({});
+  const [isShimmer, setIsShimmer] = useState(false);
 
   useEffect(() => {
     if (Object.keys(cityData).length !== 0) {
@@ -17,7 +18,7 @@ export default function Home() {
       )
         .then((res) => res.json())
         .then((data) => setCurrentWeather(data))
-        .catch((err) => <Navigate to="/error" />);
+        .catch((err) => <Navigate to="/error?message=Error occurred while fetching data. Try with different input or check your internet connection." />);
     }
   }, [cityData, units]);
 
@@ -35,6 +36,9 @@ export default function Home() {
         suggestions={suggestions}
         setSuggestions={setSuggestions}
         setUnits={setUnits}
+        myLocalSuggestion={myLocalSuggestion}
+        setMyLocalSuggestion={setMyLocalSuggestion}
+        setIsShimmer={setIsShimmer}
       />
       <Frame
         cityData={cityData}
@@ -42,6 +46,7 @@ export default function Home() {
         units={units}
         hourlyDropdown={hourlyDropdown}
         setHourlyDropdown={setHourlyDropdown}
+        isShimmer={isShimmer}
       />
     </>
   );

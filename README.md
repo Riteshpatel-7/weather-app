@@ -1,12 +1,62 @@
-# React + Vite
+# 🌤️ Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern weather application built for the hackathon to provide accurate, real-time weather updates with a clean and responsive UI.  
+This project leverages **Open-Meteo**, geolocation, and custom features to give users a smooth experience across devices.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 🌍 **Location-based weather** using Geolocation API  
+- 🔎 **Search by city**  
+- 🌡️ **Current temperature, humidity, wind, and conditions**  
+- ⏳ **Apparent temperature & feels-like factor**  
+- 📅 **Day and week forecasts**  
+- 📱 **Responsive layout** for mobile & desktop  
+- ⚡ **Local storage support** for user preferences (units & previous selected city)
+- ✨ **Shimmer effect & skeleton loading** for smooth UI  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React + TailwindCSS  
+- **APIs:** Geolocation API + Open-Meteo  
+- **State Management:** React hooks & localStorage  
+- **Deployment:** [Vercel / Netlify / GitHub Pages]  
+
+---
+
+## 📂 Project Structure
+
+```bash
+.
+├── src/
+│   ├── assets/         # icon and images
+│   ├── components/     # UI components
+│   └── hooks/          # Custom React hooks
+│   
+├── public/             # Static assets
+├── package.json
+├── tailwind.config.js  # tailwind configuration 
+├── README.md
+└── vite.config.js
+
+```
+
+---
+
+## 🔗 Links
+
+- **🌐 Live Link:** [Weather App](https://weather-by-ritesh.netlify.app/)
+- **📂 GitHub Repo**: [GitHub Link](https://github.com/Riteshpatel-7/weather-app)
+
+
+## 🏆 Hackathon Notes
+
+This project is built as part of the **FM30 Hackathon** by [Frontend Mentor](https://www.frontendmentor.io/) to demonstrate skills in frontend development, API integration, and UX design.
+
+## 🤝 Contribution
+
+Contributions, issues, and feature requests are welcome!
+Feel free to fork this repo and submit a PR.

@@ -57,13 +57,19 @@ function getTimeInAMPM(time) {
   return hour + ampm;
 }
 
-export default function ({ cityData, currentWeather, units, hourlyDropdown, setHourlyDropdown }) {
+export default function ({ cityData, currentWeather, units, hourlyDropdown, setHourlyDropdown, isShimmer }) {
+   if (isShimmer) {
+    return (
+      <HomeShimmer />
+    );
+  }
+
   if (localStorage.getItem("cityData") === null || Object.keys(cityData).length === 0) {
     return (
       <div className="h-[300px] flex flex-col justify-center items-center opacity-60">
         <img src={icon5} alt="icon" />
         <p className="lg:text-2xl mt-[-2rem]">
-          Please Enter Your Location . . .
+          Enter your location to get started . . .
         </p>
       </div>
     );
@@ -146,7 +152,7 @@ export default function ({ cityData, currentWeather, units, hourlyDropdown, setH
           ))}
         </div>
       </div>
-      <div className="w-[100%] max-h-[564px] xl:max-h-[574px] lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-end-4 flex flex-col gap-4 bg-[hsl(243,27%,20%)] rounded-2xl p-4 overflow-y-scroll">
+      <div className="w-[100%] min-h-[400px] max-h-[564px] xl:max-h-[574px] lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-end-4 flex flex-col gap-4 bg-[hsl(243,27%,20%)] rounded-2xl p-4 overflow-y-scroll">
         <div className="flex justify-between items-center xl:mb-2">
           <p className="text-white font-semibold">Hourly forecast</p>
           <button onClick={(e)=>{e.stopPropagation(); setHourlyDropdown(!hourlyDropdown)}} className="flex items-center justify-center gap-2 text-[0.96rem] relative bg-[hsl(243,23%,30%)] rounded-md px-4 py-1">
