@@ -12,6 +12,8 @@ import icon7 from "../assets/images/icon-drizzle.webp";
 import dropdownIcon from "../assets/images/icon-dropdown.svg";
 import HourlyForecastEle from "./HourlyForecastEle";
 import HourlyDropdown from "./HourlyDropdown";
+import Home from "./Home";
+import HomeShimmer from "./shimmer-effects/HomeShimmer";
 const today = new Date();
 
 const options = {
@@ -56,7 +58,7 @@ function getTimeInAMPM(time) {
 }
 
 export default function ({ cityData, currentWeather, units, hourlyDropdown, setHourlyDropdown }) {
-  if (Object.keys(currentWeather).length === 0) {
+  if (localStorage.getItem("cityData") === null || Object.keys(cityData).length === 0) {
     return (
       <div className="h-[300px] flex flex-col justify-center items-center opacity-60">
         <img src={icon5} alt="icon" />
@@ -64,6 +66,12 @@ export default function ({ cityData, currentWeather, units, hourlyDropdown, setH
           Please Enter Your Location . . .
         </p>
       </div>
+    );
+  }
+
+  if (Object.keys(currentWeather).length === 0) {
+    return (
+      <HomeShimmer />
     );
   }
 
