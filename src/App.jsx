@@ -43,7 +43,7 @@ function App() {
               hourlyDropdown,
               setHourlyDropdown,
               myLocalSuggestion,
-              setMyLocalSuggestion
+              setMyLocalSuggestion,
             }}
           />
         </main>

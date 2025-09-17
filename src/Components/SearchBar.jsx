@@ -11,7 +11,7 @@ export default function SearchBar({
   setSuggestions,
   myLocalSuggestion,
   setMyLocalSuggestion,
-  setIsShimmer
+  setIsShimmer,
 }) {
   const [input, setInput] = useState("");
 
@@ -42,9 +42,14 @@ export default function SearchBar({
           autoComplete="off"
           className="font-[DM_Sans] bg-[hsla(238,16%,31%,0)] placeholder:text-white placeholder:opacity-70 text-white text-lg px-6 py-2.5 w-[100%]  focus:outline-none"
         />
-        {
-          myLocalSuggestion && <MyLocationSuggestion MyLocationSuggestion={myLocalSuggestion} setMyLocalSuggestion={setMyLocalSuggestion} setCityData={setCityData} setIsShimmer={setIsShimmer}/>
-        }
+        {myLocalSuggestion && (
+          <MyLocationSuggestion
+            MyLocationSuggestion={myLocalSuggestion}
+            setMyLocalSuggestion={setMyLocalSuggestion}
+            setCityData={setCityData}
+            setIsShimmer={setIsShimmer}
+          />
+        )}
         {suggestions && (
           <Suggestion
             input={input}

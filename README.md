@@ -1,6 +1,6 @@
 # 🌤️ Weather App
 
-A modern weather application built for the hackathon to provide accurate, real-time weather updates with a clean and responsive UI.  
+A modern weather application built for the **Hackathon** to provide accurate, real-time weather updates with a clean and responsive UI.  
 This project leverages **Open-Meteo**, geolocation, and custom features to give users a smooth experience across devices.
 
 ---
@@ -23,7 +23,7 @@ This project leverages **Open-Meteo**, geolocation, and custom features to give 
 - **Frontend:** React + TailwindCSS  
 - **APIs:** Geolocation API + Open-Meteo  
 - **State Management:** React hooks & localStorage  
-- **Deployment:** [Vercel / Netlify / GitHub Pages]  
+- **Deployment:**  Netlify
 
 ---
 

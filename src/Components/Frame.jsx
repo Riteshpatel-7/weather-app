@@ -9,10 +9,11 @@ import icon4 from "../assets/images/icon-overcast.webp";
 import icon5 from "../assets/images/icon-partly-cloudy.webp";
 import icon6 from "../assets/images/icon-fog.webp";
 import icon7 from "../assets/images/icon-drizzle.webp";
+import icon8 from "../assets/images/moon.png";
+import icon9 from "../assets/images/clouded-moon.webp";
 import dropdownIcon from "../assets/images/icon-dropdown.svg";
 import HourlyForecastEle from "./HourlyForecastEle";
 import HourlyDropdown from "./HourlyDropdown";
-import Home from "./Home";
 import HomeShimmer from "./shimmer-effects/HomeShimmer";
 const today = new Date();
 
@@ -25,9 +26,9 @@ const options = {
 
 const formattedDate = today.toLocaleDateString("en-US", options);
 
-function getWeatherIcon(code) {
-  if (code === 0 || code === 1) return sunnyIcon;
-  else if (code === 2) return icon5;
+function getWeatherIcon(isDay, code) {
+  if (code === 0 || code === 1) return isDay ? sunnyIcon : icon8;
+  else if (code === 2) return isDay ? icon5 : icon9;
   else if (code === 3) return icon4;
   else if (code >= 45 && code <= 48) return icon6;
   else if (code >= 51 && code <= 57) return icon7;
@@ -42,7 +43,13 @@ function getWeatherIcon(code) {
 function getHourlyIndexes(date, currentWeather) {
   const indexes = [];
   for (let i = 0; i < currentWeather.hourly.time.length; i++) {
-    if (currentWeather.hourly.time[i].includes(date) && i >= currentWeather.hourly.time.indexOf(currentWeather.current.time.slice(0, 14) + "00")) {
+    if (
+      currentWeather.hourly.time[i].includes(date) &&
+      i >=
+        currentWeather.hourly.time.indexOf(
+          currentWeather.current.time.slice(0, 14) + "00"
+        )
+    ) {
       indexes.push(i);
     }
   }
@@ -57,14 +64,22 @@ function getTimeInAMPM(time) {
   return hour + ampm;
 }
 
-export default function ({ cityData, currentWeather, units, hourlyDropdown, setHourlyDropdown, isShimmer }) {
-   if (isShimmer) {
-    return (
-      <HomeShimmer />
-    );
+export default function ({
+  cityData,
+  currentWeather,
+  units,
+  hourlyDropdown,
+  setHourlyDropdown,
+  isShimmer,
+}) {
+  if (isShimmer) {
+    return <HomeShimmer />;
   }
 
-  if (localStorage.getItem("cityData") === null || Object.keys(cityData).length === 0) {
+  if (
+    localStorage.getItem("cityData") === null ||
+    Object.keys(cityData).length === 0
+  ) {
     return (
       <div className="h-[300px] flex flex-col justify-center items-center opacity-60">
         <img src={icon5} alt="icon" />
@@ -76,9 +91,7 @@ export default function ({ cityData, currentWeather, units, hourlyDropdown, setH
   }
 
   if (Object.keys(currentWeather).length === 0) {
-    return (
-      <HomeShimmer />
-    );
+    return <HomeShimmer />;
   }
 
   const currentTimeIndex = currentWeather.hourly.time.indexOf(
@@ -101,12 +114,17 @@ export default function ({ cityData, currentWeather, units, hourlyDropdown, setH
     const max = Math.round(
       parseFloat(currentWeather.daily.temperature_2m_max[i])
     );
-    const icon = getWeatherIcon(currentWeather.daily.weathercode[i]);
+    const icon = getWeatherIcon(
+      currentWeather.current.is_day,
+      currentWeather.daily.weathercode[i]
+    );
     dailyForecast.push({ day, min, max, icon });
   }
 
   const [hourlyDate, setHourlyDate] = useState(currentWeather.daily.time[0]);
-  const [weekday, setWeekDay] = useState(today.toLocaleDateString("en-US", {weekday: 'long'}));
+  const [weekday, setWeekDay] = useState(
+    today.toLocaleDateString("en-US", { weekday: "long" })
+  );
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
@@ -123,6 +141,7 @@ export default function ({ cityData, currentWeather, units, hourlyDropdown, setH
             <img
               className="moving h-24 lg:h-[120px]"
               src={getWeatherIcon(
+                currentWeather.current.is_day,
                 currentWeather.hourly.weather_code[currentTimeIndex]
               )}
               alt="Icon"
@@ -155,17 +174,35 @@ export default function ({ cityData, currentWeather, units, hourlyDropdown, setH
       <div className="w-[100%] min-h-[400px] max-h-[564px] xl:max-h-[574px] lg:col-start-3 lg:col-span-1 lg:row-start-1 lg:row-end-4 flex flex-col gap-4 bg-[hsl(243,27%,20%)] rounded-2xl p-4 overflow-y-scroll">
         <div className="flex justify-between items-center xl:mb-2">
           <p className="text-white font-semibold">Hourly forecast</p>
-          <button onClick={(e)=>{e.stopPropagation(); setHourlyDropdown(!hourlyDropdown)}} className="flex items-center justify-center gap-2 text-[0.96rem] relative bg-[hsl(243,23%,30%)] rounded-md px-4 py-1">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setHourlyDropdown(!hourlyDropdown);
+            }}
+            className="flex items-center justify-center gap-2 text-[0.96rem] relative bg-[hsl(243,23%,30%)] rounded-md px-4 py-1"
+          >
             <span>{weekday}</span>
             <img src={dropdownIcon} alt="dropdown" />
-            <HourlyDropdown hourlyDropdown={hourlyDropdown} setHourlyDropdown={setHourlyDropdown} today={today} setWeekDay={setWeekDay} setHourlyDate={setHourlyDate} currentWeather={currentWeather}/>
+            <HourlyDropdown
+              hourlyDropdown={hourlyDropdown}
+              setHourlyDropdown={setHourlyDropdown}
+              today={today}
+              setWeekDay={setWeekDay}
+              setHourlyDate={setHourlyDate}
+              currentWeather={currentWeather}
+            />
           </button>
         </div>
         {getHourlyIndexes(hourlyDate, currentWeather).map((index) => (
           <HourlyForecastEle
             key={index}
-            icon={getWeatherIcon(currentWeather.hourly.weather_code[index])}
-            time={getTimeInAMPM(currentWeather.hourly.time[index].slice(11, 13))}
+            icon={getWeatherIcon(
+              currentWeather.current.is_day,
+              currentWeather.hourly.weather_code[index]
+            )}
+            time={getTimeInAMPM(
+              currentWeather.hourly.time[index].slice(11, 13)
+            )}
             temp={Math.round(
               parseFloat(currentWeather.hourly.temperature_2m[index])
             )}
